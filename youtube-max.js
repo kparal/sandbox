@@ -18,6 +18,22 @@ function getVideoID() {
   return id;
 }
 
+function getCurrentTime() {
+  mp = document.getElementById("movie_player");
+  if (mp == null) {
+    mp = document.getElementsByTagName("video")[0];
+  }
+  if (mp == null) {
+    return;
+  }
+  return mp.getCurrentTime();
+}
+
+time = getCurrentTime();
+if (time == null) {
+  time = 0;
+}
+
 function main() {
   id = getVideoID();
   if (id == undefined) {
@@ -29,13 +45,13 @@ function main() {
   script2.text=['function onYouTubePlayerReady(playerId) {',
     'ytplayer = document.getElementById("myytplayer");',
     'ytplayer.setPlaybackQuality("'+quality+'");',
-    '}'].join('');
+    '}'].join('\n');
   head.appendChild(script2);
 
   document.getElementsByTagName("body")[0].innerHTML='<div id="ytapiplayer">You need Flash player 8+ and JavaScript enabled to view this video.</div>';
   params = { allowScriptAccess: "always" };
   atts = { id: "myytplayer" };
-  swfobject.embedSWF("http://www.youtube.com/v/" + id + "?enablejsapi=1&version=3&autoplay=1&autohide=1","ytapiplayer", "100%", "100%", "8", null, null, params, atts);
+  swfobject.embedSWF("http://www.youtube.com/v/"+id+"?enablejsapi=1&version=3&autoplay=1&autohide=1&start="+time,"ytapiplayer", "100%", "100%", "8", null, null, params, atts);
   
   history.pushState({}, '', '#max');
 }
