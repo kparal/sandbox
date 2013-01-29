@@ -49,9 +49,9 @@ function main() {
   head.appendChild(script2);
 
   document.getElementsByTagName("body")[0].innerHTML='<div id="ytapiplayer">You need Flash player 8+ and JavaScript enabled to view this video.</div>';
-  params = { allowScriptAccess: "always" };
+  params = { allowScriptAccess: "always", allowFullScreen: "true" };
   atts = { id: "myytplayer" };
-  swfobject.embedSWF("http://www.youtube.com/v/"+id+"?enablejsapi=1&version=3&autoplay=1&autohide=1&start="+time,"ytapiplayer", "100%", "100%", "8", null, null, params, atts);
+  swfobject.embedSWF("http://www.youtube.com/v/"+id+"?enablejsapi=1&version=3&autoplay=1&autohide=1&fs=1&start="+time,"ytapiplayer", "100%", "100%", "8", null, null, params, atts);
   
   history.pushState({}, '', '#max');
 }
